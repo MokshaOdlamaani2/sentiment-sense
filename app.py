@@ -1,10 +1,12 @@
 from flask import Flask, request, render_template
 import joblib
 import os
+
 app = Flask(__name__)
-# Load model and vectorizer
-model_path = os.path.join("models", "sentiment_model.pkl")
-vec_path = os.path.join("models", "tfidf_vectorizer.pkl")
+
+# Load model and vectorizer from notebooks/models/
+model_path = os.path.join("notebooks", "models", "sentiment_model.pkl")
+vec_path = os.path.join("notebooks", "models", "tfidf_vectorizer.pkl")
 
 model = joblib.load(model_path)
 vectorizer = joblib.load(vec_path)
@@ -23,4 +25,4 @@ def home():
     return render_template("index.html", sentiment=sentiment)
 
 if __name__ == "__main__":
-    app.run(debug=True) 
+    app.run(debug=True)
