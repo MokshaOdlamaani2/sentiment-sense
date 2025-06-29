@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# Load model and vectorizer from notebooks/models/
+# Load model and vectorizer
 model_path = os.path.join("notebooks", "models", "sentiment_model.pkl")
 vec_path = os.path.join("notebooks", "models", "tfidf_vectorizer.pkl")
 
@@ -25,4 +25,5 @@ def home():
     return render_template("index.html", sentiment=sentiment)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Bind to 0.0.0.0 and dynamic port for Render
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
